@@ -4,9 +4,9 @@ object DataModule2: TDataModule2
   object con1: TADOConnection
     ConnectionString = 
       'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\HCS 1\Docu' +
-      'ments\Embarcadero\Studio\Projects\Delphi-Gr12-Task-Database\Data' +
-      'base Preschool Testing (Latest)\Database7.mdb;Persist Security I' +
-      'nfo=False'
+      'ments\Embarcadero\Studio\Projects\Delphi-Gr12-Task-Database\Alte' +
+      'rnative\Delphi-Gr12-Task-Database\Database Preschool Project 202' +
+      '4 (Latest)\Database7.mdb;Persist Security Info=False'
     LoginPrompt = False
     Mode = cmShareDenyNone
     Provider = 'Microsoft.Jet.OLEDB.4.0'

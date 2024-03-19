@@ -51,6 +51,7 @@ type
     procedure img1Click(Sender: TObject);
     procedure cbb1Change(Sender: TObject);
     procedure img2Click(Sender: TObject);
+    procedure imgSaveClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -236,4 +237,98 @@ begin
       edtMobilePhone.Visible := true;
 end;
 
+procedure TForm1.imgSaveClick(Sender: TObject);
+var
+  iconfirm : Integer;
+begin
+  iConfirm := MessageDlg('Are you sure you want to save changes?', mtConfirmation, [mbYes, mbNo], 0);
+    if iConfirm = mrYes then
+    begin
+
+      qry1.SQL.Text := 'SELECT * FROM Students WHERE FirstName = ''' + Copy(cbb1.Text, 1, Pos(' ', cbb1.Text) - 1) + ''' OR LastName = ''' + Copy(cbb1.Text, Pos(' ', cbb1.Text) + 1, Length(cbb1.Text) - Pos(' ', cbb1.Text)) + '''';
+      qry1.Open;
+      if not qry1.IsEmpty then
+        begin
+
+           qry1.SQL.Text := 'UPDATE Students SET LastName = ''' + edt2.Text + ''' WHERE FirstName = ''' + Copy(cbb1.Text, 1, Pos(' ', cbb1.Text) - 1) + ''' OR LastName = ''' + Copy(cbb1.Text, Pos(' ', cbb1.Text) + 1, Length(cbb1.Text) - Pos(' ', cbb1.Text)) + '''';
+           qry1.ExecSQL;
+
+      qry1.Close;
+
+  // Refresh combobox
+      cbb1.Clear;
+      qry1.SQL.Text := 'SELECT FirstName, LastName, ID FROM Students';
+      qry1.Open;
+      while not qry1.Eof do
+      begin
+        cbb1.Items.Add(qry1.FieldByName('FirstName').AsString + ' ' + qry1.FieldByName('LastName').AsString);
+        qry1.Next;
+      end;
+      qry1.Close;
+
+      if cbb1.Text = '' then
+      begin
+        {lbl2.Visible := False;
+        lbl3.Visible := False;
+        lbl4.Visible := False;
+        lbl5.Visible := False;
+        edt1.Visible := False;
+        edt2.Visible := False;
+        edt3.Visible := False;
+        edt4.Visible := False;
+        img4.Visible := False;
+        chk1.Visible := False;  }
+      end
+      else
+      begin
+       { lbl2.Visible := true;
+        lbl3.Visible := True;
+        lbl4.Visible := True;
+        lbl5.Visible := True;
+        edt1.Visible := False;
+        edt2.Visible := False;
+        edt3.Visible := False;
+        edt4.Visible := False;
+        img4.Visible := False;
+        chk1.Visible := True; }
+      end;
+
+
+
+
+    end
+    else
+    begin
+      qry1.SQL.Text := 'SELECT * FROM Students WHERE FirstName = ''' + Copy(cbb1.Text, 1, Pos(' ', cbb1.Text) - 1) + ''' OR LastName = ''' + Copy(cbb1.Text, Pos(' ', cbb1.Text) + 1, Length(cbb1.Text) - Pos(' ', cbb1.Text)) + '''';
+      qry1.Open;
+      if not qry1.IsEmpty then
+       begin
+       { lbl3.Caption := qry1.FieldByName('FirstName').AsString;
+        lbl2.Caption := qry1.FieldByName('LastName').AsString;
+        lbl4.Caption := qry1.FieldByName('StudentID').asstring;
+        lbl5.Caption := qry1.FieldByName('AttendanceDate').asstring;
+        edt1.Text := qry1.FieldByName('FirstName').AsString;
+        edt2.Text := qry1.FieldByName('LastName').AsString;
+        edt3.Text := qry1.FieldByName('StudentID').asstring;
+        edt4.Text := qry1.FieldByName('AttendanceDate').asstring;
+        //lbl6.Caption := qry1.FieldByName('').asstring;
+         if qry1.FieldByName('Late').AsBoolean = true then
+           begin
+            chk1.Checked := true;
+           end;         }
+       end;
+
+      {lbl2.Visible := True;
+      lbl3.Visible := True;
+      lbl4.Visible := True;
+      lbl5.Visible := True;
+      edt1.Visible := False;
+      edt2.Visible := False;
+      edt3.Visible := False;
+      edt4.Visible := False;
+      img4.Visible := False;
+      qry1.Close;
+      cbb1Change(Sender); }
+end;
+end;
 end.

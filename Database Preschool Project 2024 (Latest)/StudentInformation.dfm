@@ -216,7 +216,7 @@ object Form1: TForm1
     object lblDateOfBirth: TLabel
       Left = 186
       Top = 84
-      Width = 71
+      Width = 7
       Height = 32
     end
     object lblIDNumber: TLabel
@@ -357,6 +357,7 @@ object Form1: TForm1
         CE7C36BE3C3CB97CA4078A2F35AFC9FE04A15EF00B2A4008851CCDA352D13E66
         23C26313E0D3E0A6ABACFF03C068370F1BCF5C890000000049454E44AE426082}
       Visible = False
+      OnClick = imgSaveClick
     end
     object cbbGrade: TComboBox
       Left = 560
